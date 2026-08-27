@@ -5,22 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Daily Briefing</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
-        
         * { box-sizing: border-box; }
-        body { 
-            font-family: 'Lora', serif; 
-            background-color: #fcfcfc; 
-            color: #111; 
-            margin: 0; 
-            padding: 20px; 
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background-color: #fcfcfc;
+            color: #111;
+            margin: 0;
+            padding: 20px;
         }
-        .newspaper-container { 
-            max-width: 1200px; 
-            margin: auto; 
-            background: #fff; 
-            padding: 40px; 
+        .newspaper-container {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
         }
         .masthead {
             text-align: center;
@@ -28,22 +31,24 @@
             padding-bottom: 10px;
             margin-bottom: 5px;
         }
-        .masthead h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 5em; 
+        .masthead h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 5em;
             font-weight: 900;
-            text-transform: uppercase; 
-            margin: 0; 
-            letter-spacing: 2px; 
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 2px;
         }
-        .date-bar { 
+        .date-bar {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid #000; 
-            padding: 5px 0; 
-            margin-bottom: 10px; 
-            font-size: 0.9em;
+            border-bottom: 1px solid #000;
+            padding: 5px 0;
+            margin-bottom: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8em;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .nav-bar {
             text-align: center;
@@ -54,28 +59,18 @@
             font-weight: bold;
             word-spacing: 15px;
         }
-        
-        .layout-wrapper {
-            display: flex;
-            gap: 40px;
-        }
-        .main-content {
-            flex: 7; /* 70% width for news */
-        }
-        .sidebar {
-            flex: 3; /* 30% width for market data */
-            border-left: 1px solid #ddd;
-            padding-left: 30px;
-        }
-        
-        /* Lead Story */
+
+        .layout-wrapper { display: flex; gap: 40px; }
+        .main-content { flex: 7; }
+        .sidebar { flex: 3; border-left: 1px solid #ddd; padding-left: 30px; }
+
         .lead-story {
             border-bottom: 2px solid #000;
             padding-bottom: 20px;
             margin-bottom: 30px;
         }
         .lead-story h2 a {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 2.8em;
             font-weight: 900;
             line-height: 1.1;
@@ -84,42 +79,44 @@
             text-decoration: none;
         }
         .lead-story h2 a:hover { text-decoration: underline; }
-        
-        /* Article Grids */
+
         h4.section-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', Georgia, serif;
             text-transform: uppercase;
             border-bottom: 1px solid #000;
             padding-bottom: 5px;
             margin-top: 30px;
             margin-bottom: 15px;
             font-size: 1.2em;
+            letter-spacing: 0.5px;
         }
         .articles-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 25px;
         }
-        .article h3 { 
-            font-family: 'Playfair Display', serif;
-            margin: 0 0 8px 0; 
-            font-size: 1.2em; 
-            line-height: 1.3; 
+        .article h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            margin: 0 0 8px 0;
+            font-size: 1.2em;
+            line-height: 1.3;
         }
         .article h3 a { color: #111; text-decoration: none; }
         .article h3 a:hover { text-decoration: underline; }
-        
-        .meta { 
-            margin: 0; 
-            font-size: 0.8em; 
-            color: #555; 
+        .no-articles { font-style: italic; color: #777; font-size: 0.9em; }
+
+        .meta {
+            margin: 0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75em;
+            color: #555;
             text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
         .meta strong { color: #000; }
-        
-        /* Sidebar Market Watch */
+
         .market-header {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 1.3em;
             font-weight: 900;
             text-transform: uppercase;
@@ -127,10 +124,7 @@
             padding-bottom: 10px;
             margin-bottom: 15px;
         }
-        .market-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+        .market-table { width: 100%; border-collapse: collapse; }
         .market-table th, .market-table td {
             padding: 10px 0;
             border-bottom: 1px solid #eee;
@@ -140,11 +134,21 @@
             text-align: left;
             text-transform: uppercase;
             color: #777;
-            font-size: 0.8em;
+            font-size: 0.75em;
+            font-family: 'IBM Plex Mono', monospace;
         }
         .market-table .price, .market-table .change { text-align: right; }
         .ticker-name { font-weight: 600; }
-        
+
+        .footer-note {
+            margin-top: 40px;
+            text-align: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7em;
+            color: #999;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 900px) {
             .layout-wrapper { flex-direction: column; }
             .sidebar { border-left: none; padding-left: 0; border-top: 2px solid #000; padding-top: 30px; }
@@ -155,132 +159,133 @@
 </head>
 <body>
     <div class="newspaper-container">
-        
-        <!-- Header Section -->
+
         <div class="masthead">
             <h1>The Daily Briefing</h1>
         </div>
         <div class="date-bar">
             <span>Vol. 1 — Automated Edition</span>
-            <span>Wednesday, August 26, 2026</span>
+            <span>Thursday, August 27, 2026 · Generated 07:14 AM IST</span>
         </div>
         <div class="nav-bar">
-            PORTFOLIO &nbsp; • &nbsp; MARKETS &nbsp; • &nbsp; M&A &nbsp; • &nbsp; ARTIFICIAL INTELLIGENCE &nbsp; • &nbsp; CFA & IIM
+            PORTFOLIO &nbsp; • &nbsp; MARKETS &nbsp; • &nbsp; M&amp;A &nbsp; • &nbsp; ARTIFICIAL INTELLIGENCE &nbsp; • &nbsp; CFA &amp; IIM
         </div>
-        
-        <!-- Main Content & Sidebar -->
+
         <div class="layout-wrapper">
-            
-            <!-- Left Side: News -->
+
             <div class="main-content">
-                
+
                 <div class="lead-story">
-                    <p class="meta"><strong>Livemint</strong> | Mon, 29 Apr 2013 01:10:08 </p>
-                    <h2><a href="https://news.google.com/rss/articles/CBMiPkFVX3lxTE1yWGN4V2dreWQxbXU3MTAxX3hTZmtTdVI5UzE2cnNuTm1KeXFyMEowQWlwMmN3VVJMb2ozVWRn?oc=5" target="_blank">Business News Today: Read Latest Business News, Live India Share Market News, Finance & Economy News | Mint</a></h2>
+                    <p class="meta"><strong>Business Standard</strong> | 2026-08-25 11:46:09</p>
+                    <h2><a href="https://www.business-standard.com/markets/capital-market-news/sensex-gains-287-points-nifty-ends-above-24-300-after-volatile-session-126082500945_1.html" target="_blank">Sensex gains 287 points, Nifty ends above 24,300 after volatile session</a></h2>
                 </div>
-                
+
                 <div class="articles-grid">
                     
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMikAJBVV95cUxPTWQxdGx2eVg0WWdPLUhmbEZEWnN3bEtaeGl3VDl5SlFaR0hSX2NVVVhLNUo2b1NfRE5jUmxLMU1CSm5abm95ZFY1d2xuTEFwZ2FncnNSeW45dEhaQ25UcUlEYzhseDNkYWxLUkpVRjBER2VnMUZZbVlOSGFWTUhnUk5XN0NBbnp1cWVkeENJSndlazJ4a1hTZGg0cy1oWGVRYTJqZl9URzhVbzlsS1hud1NSMnJMc0U5LWJpRnZPNklqbHQ1WW5ucVRycVluc3B2RXlzOFd4ZlE5RzZfTkt5d3U1NUtPeTByLThfRVllU2E5MFhJMEdWZ0pabXJ0bW0wWVZfLVZ5M0FBNHFmbTV4WtIBkAJBVV95cUxPTWQxdGx2eVg0WWdPLUhmbEZEWnN3bEtaeGl3VDl5SlFaR0hSX2NVVVhLNUo2b1NfRE5jUmxLMU1CSm5abm95ZFY1d2xuTEFwZ2FncnNSeW45dEhaQ25UcUlEYzhseDNkYWxLUkpVRjBER2VnMUZZbVlOSGFWTUhnUk5XN0NBbnp1cWVkeENJSndlazJ4a1hTZGg0cy1oWGVRYTJqZl9URzhVbzlsS1hud1NSMnJMc0U5LWJpRnZPNklqbHQ1WW5ucVRycVluc3B2RXlzOFd4ZlE5RzZfTkt5d3U1NUtPeTByLThfRVllU2E5MFhJMEdWZ0pabXJ0bW0wWVZfLVZ5M0FBNHFmbTV4Wg?oc=5' target='_blank'>Expert view: Nifty 50 can hit 27,000 by March 2027, EPS growth rate of 10%-11% likely in FY27, says Ametra PMS CIO</a></h3>
-            <p class='meta'><strong>Livemint</strong> | Tue, 25 Aug 2026 11:19:39 </p>
+            <h3><a href='https://www.business-standard.com/markets/capital-market-news/nifty-slips-33-points-sensex-slides-172-points-amid-iran-sanctions-concerns-126082400855_1.html' target='_blank'>Nifty slips 33 points, Sensex slides 172 points amid Iran sanctions concerns</a></h3>
+            <p class='meta'><strong>Business Standard</strong> | 2026-08-24 11:35:20</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMiwwFBVV95cUxQakxTTlR5M18wMUZoUUc5OC1vbXNaR290M2ZhMzkxc1lkbHV5QVNETm83SlN0SnpRUzZ2TTdxWDBPLUhGUFBQMUtmRGpwNEQtT0I5Z01LbUV0WTN6bHJyX05rd3N5bmd6NXR5VTJmbUliYlR1SG9MQTZlVWh3WTV5UzU3UFNGYkJXY2dyOVRETkI1SE9NbVU3N29vLWp6T1VIUkQxamt5bC1BQ25tUnNxd3NEdUhucXJ6di1xN0d6Q0JkdXPSAcgBQVVfeXFMT05zRXNjRGM5NjhraDNrODlZQndLZ2JrR21CU0h3d01DZF9hU0x5QWw4R3VFdFp2ZS0xWXJOU3hxT01JUkEyWjdIT3R6ckQ0SklvbjVFUWoyZG5GRkNZd1BmclZ5MERyUDhDWEJCT25JVS1CUjRfaGo0WGF4ZzVnaGtUbnBwSTI1NU9tT1JpSmRRdnJQNElPUlRkdWFscWdZN2tydlJoQ2p3MTFoRnI0b01JakVTTnZjLVZqNHEwQnZZV24tRHVWMDI?oc=5' target='_blank'>Sitharaman, Goyal in Singapore with 70-strong business delegation for 4th ministerial roundtable</a></h3>
-            <p class='meta'><strong>Livemint</strong> | Wed, 19 Aug 2026 08:59:07 </p>
+            <h3><a href='https://economictimes.indiatimes.com/markets/forex/forex-news/interventions-hold-rupee-on-narrow-leash-traders-await-us-sanctions-on-iran/articleshow/133461311.cms' target='_blank'>Interventions hold rupee on narrow leash, traders await US sanctions on Iran</a></h3>
+            <p class='meta'><strong>The Times of India</strong> | 2026-08-24 10:25:44</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMipgFBVV95cUxQRW91M1hyVk5hbllsM2FZVUQwR2Y5b0JqaGtfcUVNNEJJM281WmVJNmxWaFhYNUtkN0RHamJ4dU9iU3cxQy1DQnJOWDFoUXdwaFZHM0RZdFhDeWdPTEhVZ1BoTGNIQ2pFcnoxTlBVRFE5dXpxT2pDRWptcHBmeFBDMnVpYTlGbUkyV0gwcWFMWHZwaXMyeWpBNm01RmlVNTNQdjVOQ2ln0gGmAUFVX3lxTFBFb3UzWHJWTmFuWWwzYVlVRDBHZjlvQmpoa19xRU00QkkzbzVaZUk2bFZoWFg1S2Q3REdqYnh1T2JTdzFDLUNCck5YMWhRd3BoVkczRFl0WEN5Z09MSFVnUGhMY0hDakVyejFOUFVEUTl1enFPakNFam1wcGZ4UEMydWlhOUZtSTJXSDBxYUxYdnBpczJ5akE2bTVGaVU1M1B2NU5DaWc?oc=5' target='_blank'>Q1 earnings cheer needs to last, but it may not</a></h3>
-            <p class='meta'><strong>Livemint</strong> | Mon, 24 Aug 2026 01:01:01 </p>
+            <h3><a href='https://economictimes.indiatimes.com/markets/stocks/news/stocks-in-news-reliance-industries-bank-of-baroda-power-grid-natco-pharma-and-jsw-infra/articleshow/133444199.cms' target='_blank'>Stocks in news: Reliance Industries, Bank of Baroda, Power Grid, NATCO Pharma and JSW Infra</a></h3>
+            <p class='meta'><strong>The Times of India</strong> | 2026-08-24 00:30:00</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMi2AFBVV95cUxNS3I1NXdkaHdPVHNVLTc5ZmM5RERWeHh3MUpLVVJxM2pwbmxqbGtGVFZPTUl3enhiYUJvRDZDaGQ3VV9JTWY3NlhrYjF6U2tHalZ6YmhfSUpkbW83WnR6LV9IWFVKOTc1WkppamF4T0tDYWRKZ0EybjE0Z0lSRlVjNnRzOW5LSTc2RVNIRW9GYmw3WkxsWGtjLWJ6ZXRXOGpzRGxsanphOGpVcTYtRUM4ejBkaG1fRG1vc3NCNURVY0V2UklmaE1PZEZ3V2I1bEhrQ0sxU04wZGnSAd4BQVVfeXFMTXo0SWd0dDA3WXJibkNkT3pHM2JhX2R5azhKSDR0Zy1mSGRTUnVsVFNzSFdMR2JXS21zcllybzJZV1VoeHNlYkM3LVFzeVlfMVg4YTQzbzBrX3Nva0dnT2Z4R3Jaa2FNTFpibW4yYjNYQ3ltcGZoaWNIRXZjRUZVNXh6MFg3VmdGaENEMm5uaWthQ0syakYtNzhYWHhETC1ZbUlFbWR6b3c0TEI4dzhZblNZVHUxUVdVZmt5ZW9UOFpLbFdnN3otVllCNVAta2tCWkUxR2JxVDZBM00zanZ3?oc=5' target='_blank'>Horizon Industrial Parks IPO Day 3: Issue subscribed 27% so far. Check GMP, review - apply or not?</a></h3>
-            <p class='meta'><strong>Livemint</strong> | Wed, 19 Aug 2026 04:14:13 </p>
+            <h3><a href='https://www.thehindubusinessline.com/markets/sensex-nifty50-today-stock-market-highlights-25-august-2026/article71384173.ece' target='_blank'>Sensex today | Stock Market Highlights: Sensex settles 286 points higher, Nifty touches 24,334</a></h3>
+            <p class='meta'><strong>BusinessLine</strong> | 2026-08-25 10:59:46</p>
+        </div>
+        
+        <div class='article'>
+            <h3><a href='https://www.thehindubusinessline.com/markets/sensex-nifty50-today-stock-market-live-updates-25-august-2026/article71384173.ece' target='_blank'>Sensex today | Stock Market Live: Stock to buy today: Action Construction Equipment</a></h3>
+            <p class='meta'><strong>BusinessLine</strong> | 2026-08-25 01:04:22</p>
         </div>
         
                 </div>
-                
-                <h4 class="section-title">Mergers & Acquisitions</h4>
+
+                <h4 class="section-title">Mergers &amp; Acquisitions</h4>
                 <div class="articles-grid">
                     
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMiywFBVV95cUxNZUlhLXpMVkRWSDdLbUh4Z3F0VnhzRlZKZEx1ckdQQ004U0c1ZXZ6d1V6YWVGYjdhaFo0NHFOX1ZRaWxUOHIxZGtua3pJMkJzOGZqMUFNNlNFTFF1Nl9keVE4VzR4cWg0UERPTHh3NTJPcDlEeFI0SVFFMWlMbHc0bWZVdDZpT1ZuM0pVRjRpR1liSFZzanpzdGg4X1ZKOFZjVFRmRzlUb1VycUhCQVJYcWFpR1R0SjlaRlA3cDk3c1FPSlBEZTZHRmhGMA?oc=5' target='_blank'>Private Equity Finds New Way to Ride Out Cash Crunch</a></h3>
-            <p class='meta'><strong>Bloomberg</strong> | Mon, 24 Aug 2026 21:00:01 </p>
+            <h3><a href='https://www.business-standard.com/markets/news/sebi-fractional-shares-companies-amendment-bill-retail-investors-126082400466_1.html' target='_blank'>Sebi seeks inclusion of fractional shares in Companies Amendment Bill</a></h3>
+            <p class='meta'><strong>Business Standard</strong> | 2026-08-24 07:53:00</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMi2gFBVV95cUxOQzRMcGlIUnJ3eGVFM21Na1lSUFNfalMtRl8zSkYwX3ZnQTJTMll4MHZ0dlJIWTI2YzVDTFVLTzcwVldrMGZnZHJtYXZXdTlBVndWZS1Na1ctLUQ5anNTTWFfdHV2WHJKaXd5RktGaUZNSjRSTGFuQjNNR1BIOHFXNHYyQmZpYm5UaFE0VVVvZnQ5SlpxOGxHWllvbG92a1NHOEVmc2JUZWxDMTZWU3g0UkdHYWlKWDItdFItazFJYTFDclNGTXpTNmY2MmpJdWRVcTdBbTg1RXBVd9IB3wFBVV95cUxQX01LN2p6emVDdXAxaklRVmpBUkt6OXYxRnoxLWxLT3NOYml5TU1Rd2dZZ2JZbHY0NzRuVUZOdjR4eUJ6MnEzMkp4QllOdGZSdXdCSDFNdDkyQy0xaFlId2ZWMzN0c3BEc292Mm1XTnhlcV9vd2IyYlJldlVmTGd0RTNRdmJaSlVjTmg5R2dqS21yQ3h4Z2pLNHZIa1FzU1Nwa1lPblRhSjQzOU1ERl9heGY0bVo0dDUxMlU1d09jcWhvNE5Kemg1R3JvNzZ0WGZuMXA1RUF2d1FOendWN3I0?oc=5' target='_blank'>MC Insider | A shocking early experiment and a triple M&A battle brewing in industrials</a></h3>
-            <p class='meta'><strong>Moneycontrol.com</strong> | Fri, 21 Aug 2026 14:00:13 </p>
+            <h3><a href='https://www.business-standard.com/companies/start-ups/iim-bangalore-incubator-tops-7-billion-in-startup-value-as-it-turns-to-ai-126081600587_1.html' target='_blank'>IIM Bangalore incubator tops $7 billion in startup value as it turns to AI</a></h3>
+            <p class='meta'><strong>Business Standard</strong> | 2026-08-16 14:21:43</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMi2AFBVV95cUxOODktSzZzVUVMSldHcGkzanZfTXBZSUZkTnI3VGxtNkFSaW0wU0EwYVFRMTh3MGFCeExvU25fd1N3cWtpTTh6TEU2UFplQmgyQW1McWk5VnRCN1A1NE1tczZQSXFBTVo4cjEzcTY1Ym9ld0tRU1FiX00xU2RnVlotdXlNWGZkaFVzZ1NLdXJmdXRqc2Ryay1ZdVNYLWUzN3BULUJIbW5HQlY5ak91Zjd0SXpVMjI3YkJWRzhXM24yNDNWT19sZHV2NXZpOFRtQmxHVXVCOW5RRDjSAd4BQVVfeXFMTjNqMnRBcV9lWFNYeUdpSTdJdEhrbGZ6c2hOZ0ZHRlY1VDhrT3JFU1dBUFZZdGh5Z21HbkRRcC15bDJNdk1fSHdHaVlPSEEzNmdmNHZyaThINTUzSlZZU19hUjRPUWhORS1WTGVFUFppdWxhUHRhdHBSMldCMjhLdTBaYldHTzZKWThvVkY2NGs3ZFVyUzY4SXVnNXBTV1NXTWFsMWFHUl9ocjFtRGl1YUNmX3BxVWx5dVFmS1B5My0zYjY2NUphbHJoX0R5NFY5UlZTOENEazVsYzlEWGFB?oc=5' target='_blank'>Siguler Guff raises $500 million for India mid-market private equity strategy</a></h3>
-            <p class='meta'><strong>Moneycontrol.com</strong> | Wed, 19 Aug 2026 12:39:50 </p>
+            <h3><a href='https://www.energymonitor.ai/news/aditya-birla-renewables-secures-mufg-loan/' target='_blank'>Aditya Birla Renewables secures $1.6bn MUFG loan for Sprng Energy deal</a></h3>
+            <p class='meta'><strong>Energymonitor.ai</strong> | 2026-08-24 11:11:18</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMi3AFBVV95cUxNNkNiUjFvU3llR01jMVgyY2IwTkdUeHBMaEJHZG9YaXE3RFJkUWlOOTJnRmw5Z01DaXhDbE1fOWJMSk1xblJ0V2ZHWjZMZThsSVUwU2dqd1ktbEFLTnF1WTF1YV9DVlFHMGZCbENxamczQ0F3d2lWWHVUU2tweG90STVXYUpfeFI5MEg3Y3ZQd1lESUNMRW14eUQ4VFhSaFA1dDFCNzNlYTFkUlJwa0NDYzhtckZBYml1R1l5Nk5rNFhVYkYzM2FiOG9fYXVqOEloQlY3Z1J2cUpzZlhf0gHiAUFVX3lxTE1VMWhSNExPZkQ1cEhTblhKRTZxLXJJdG10c1hFVHdEbDFMYmJZMDY4emZDdk1GdFBhaG5oemFWRHNiOHRTOXFpVmlZUFd5MHVSd09DeWJ4aHZjVWQ1dWhfVzBfbDFRRVBxbENyWTEwUVRrYWlPLVJmYlZxeVc4NjNVd2FVbGJjNXlHY2ZvZmcxQ05hQVgzdWhjeVJCME9QakxLUVRtMlFwQmFRTzBrSnRuejFGYmpFQUZYQ0R6RnhvSnplYWlhZUVSTGpCWDMwXzFURFRyQ0pGckJyUnB0ZW9WRVE?oc=5' target='_blank'>Family office assets seen topping Rs 1 lakh cr as private bets rise</a></h3>
-            <p class='meta'><strong>The Times of India</strong> | Thu, 20 Aug 2026 18:35:00 </p>
+            <h3><a href='https://www.prnewswire.com/news-releases/project-portfolio-management-market-worth-17-75-billion-by-2031--report-by-marketsandmarkets-302852711.html' target='_blank'>Project Portfolio Management Market worth $17.75 billion by 2031</a></h3>
+            <p class='meta'><strong>PRNewswire</strong> | 2026-08-17 14:01:00</p>
         </div>
         
                 </div>
-                
-                <h4 class="section-title">AI & Innovation</h4>
+
+                <h4 class="section-title">AI &amp; Innovation</h4>
                 <div class="articles-grid">
                     
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMivAFBVV95cUxQS0xINWRaSDFhQkxzcWtKd3Q4ZmNhUndScGdaQWl4U0J6dURXY1J0UmJ6aE96ajBIdzZHa3hGWUE2dktKYjJkdE44N05YZ1E3MmR1WXJ5Wm1xTWNFQW5oUHl0bEZXZklvd1RhaFFTSFBmcXFNX3pFYWRkLXpIQ1FleW4xdlhmTXcwdUlCQUZkUFpYWl9mSnA2cTFGWGtsT1Jad1RsaGRVYTdyREpiSUtXemx4djJHNkhrS1lUMw?oc=5' target='_blank'>OpenAI Claims Its New Chips Can Outperform Nvidia Processors in Tests</a></h3>
-            <p class='meta'><strong>Bloomberg</strong> | Tue, 25 Aug 2026 16:19:39 </p>
+            <h3><a href='https://www.livemint.com/opinion/online-views/humanity-race-regulate-artificial-intelligence-human-deepfake-bots-harari-amodei-openai-deepmind-11787660997501.html' target='_blank'>Humanity must race to regulate artificial intelligence: who wins could plausibly prove pivotal for the world</a></h3>
+            <p class='meta'><strong>Livemint</strong> | 2026-08-26 02:00:22</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMivgFBVV95cUxNa3ZQWHh3TzAxM0Y4QWRYUjlwWUp4aHEzcXRDbEQ5dXo4V2RoX1Vud3E0SzFQeVM2V1o0SHJyeUx3bmVNeDNrTWg3N244cG1wSno4OUIzWXR4NFZOZzVHMWVLMHVIa3hVRVFqN2FkNXFyV3VWb0dDenhiZGZNblRUWHJtNy1sN1p3czc0U3lHTVFqMEVEZURENTFGbGFrdEVUTHNhY1NlckJQUFNZTzJnR3lhWTVfX1Vrbkl5X3hR?oc=5' target='_blank'>AI Security Startup Working With Anthropic and Google Raises $140 Million</a></h3>
-            <p class='meta'><strong>Bloomberg</strong> | Tue, 25 Aug 2026 13:00:00 </p>
+            <h3><a href='https://www.naturalnews.com/2026-08-26-epa-proposal-end-disclosure-data-center-pollution.html' target='_blank'>Trump EPA Proposes Rule to End Public Disclosure of Data Center Air Pollution, Critics Allege</a></h3>
+            <p class='meta'><strong>Naturalnews.com</strong> | 2026-08-26 06:00:00</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMitgFBVV95cUxON1dGaTZHRWtJTFZDTU16bXdIajItMUxnbXZMeGd2MnluZVEzM1VtOTdGaUV4TG1BSDV1RlNySVl2WmVWNWtHbTZiR2hzWC1vVnRpQmoza1JYeEp3ZV80WkE2V0Y0aWxGNnl3UEpEV1lIcVNqd3V1bzkzOGlVRzdwOHA0UHRXa3Nvb01pb2k1S0JJcGZWdGhNWWdFanRkNHNrUkdLQW01SlZtalE4ejNyWDF0SnBaQQ?oc=5' target='_blank'>Indian AI Data Center Firm Orders 9,000 Nvidia Vera Rubins</a></h3>
-            <p class='meta'><strong>Bloomberg</strong> | Tue, 25 Aug 2026 12:04:45 </p>
+            <h3><a href='https://www.lifesciencesworld.com/how-much-sunlight-does-a-ferret-need/' target='_blank'>How much sunlight does a ferret need?</a></h3>
+            <p class='meta'><strong>Lifesciencesworld.com</strong> | 2026-08-26 02:25:09</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMitgFBVV95cUxNR0ltRHUtSmZSTFV2cVlTbHlqMFdlU1kzT2NOcGFnc1VFVVdXMy13NzFJR1ktWEJ6d19GV090ZGV1YWV0bXpKMzM0ZVJFOEJ3dDdKWHdDX3RVd09Nc0ZZS1JZTl9fallEdmU0ZE8teGpKcDNDdU5zR2NiM2RaV3p4NEhaRS1jcE5wX0VlTzVLNGJ2VEZRcWVtalZBSXJ1bkktbTdCU1IyWWdXOFVfR1NVTkFOVGh2Zw?oc=5' target='_blank'>Record Short Bets Hit China’s AI Model Duo on Fierce Competition</a></h3>
-            <p class='meta'><strong>Bloomberg</strong> | Tue, 25 Aug 2026 23:30:00 </p>
+            <h3><a href='https://news.google.com/rss/articles/CBMif0FVX3lxTE5vNHRZblJwZHNZZEZfZ285LUdncWl0YUk0UHVfTDM1b05YSU9rVHRhYUpkQ1VwV1RJaXZ4SzZwV2dBd2ZYeEZtbUpGNkpDdng5WjRTa28yOVdIM3drTERSVVVoeWI0WnpWT3dQbGVQcVhvdEZIZE1oaTB4cHdRb0E?oc=5' target='_blank'>The turbulent AI era is here. The choices we make now are critical.</a></h3>
+            <p class='meta'><strong>gatesnotes.com</strong> | Thu, 27 Aug 2026 06:49:11</p>
         </div>
         
                 </div>
-                
-                <h4 class="section-title">CFA & IIM Updates</h4>
+
+                <h4 class="section-title">CFA &amp; IIM Updates</h4>
                 <div class="articles-grid">
                     
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMimAFBVV95cUxOZ3N0Znk5X0VsM1h2RmZITVgyN3VzQVFHMFlFa1RZU1pmVDcyQVdaNGc3aDhoSS1ENlVzUDI0N0M2dVd0cFlBNXZGMVczZk5mc1ktaFNndkwtY1dsZmR4emVPVWctTGdya3dWX3B1VzRwd2pWSmpqRVBBSW5uSDF6Y2xTTVdxNEo2RDlpRTBwOXE1ZEhCUUJvUQ?oc=5' target='_blank'>Certificate Courses</a></h3>
-            <p class='meta'><strong>Bloomberg</strong> | Wed, 11 Mar 2026 18:26:44 </p>
+            <h3><a href='https://ritholtz.com/2026/08/transcript-alex-morris/' target='_blank'>Transcript: Alex Morris, “Buffett and Munger Unscripted</a></h3>
+            <p class='meta'><strong>Ritholtz.com</strong> | 2026-08-24 16:00:01</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLWxWWWdXTDk4RzBjYkhlTGNjMzdZX3pkd0ZMV19zb1Y4bzYwUy0xUWRKcWxxMXhsT2dhUkpFdEFuZ2tCSUhDZFFCYnBqTm94SW54eGdxMHhZQ096N2R6SUJtZG8zMWdJUkVCd0YwejFibUIyX29BR1V4X0NZSURCbEJHb0Ewb0xH?oc=5' target='_blank'>NOBEL HYGIENE LIMITED CORPORATE IDENTITY NUMBER: U24239MH2001PLC335529 REGISTERED OFFICE CORPORATE OFFICE CONTACT PERSON TELEPHO</a></h3>
-            <p class='meta'><strong>images.moneycontrol.com</strong> | Thu, 20 Aug 2026 07:00:00 </p>
+            <h3><a href='https://www.prnewswire.com/news-releases/jeff-weniger-joins-corgi-as-chief-investment-strategist-after-nearly-a-decade-at-wisdomtree-asset-management-302855783.html' target='_blank'>Jeff Weniger joins Corgi as Chief Investment Strategist After Nearly a Decade at WisdomTree Asset Management</a></h3>
+            <p class='meta'><strong>PRNewswire</strong> | 2026-08-20 00:13:00</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMihwFBVV95cUxPcFhhemlRUmRRODl0OV9hY1VwRTZJcC1JaVMwUm9weXhzTkhRTFVUcHlQT0N1T2p2NTlKWXpXbHNiRE5DYUJGRlhoc1JKeWlYQjFZVmQ3U1Q2bGNHMGJpY3l6dTVPaTRyX0FDRWktRzNiVnRMOTRQS09IaHNuQnpDYU5Ib2I4MWM?oc=5' target='_blank'>AVTAR STEEL LIMITED Corporate Identification Number: U27104DL1996PLC078684 REGISTERED AND CORPORATE OFFICE CONTACT PERSON E-MAIL</a></h3>
-            <p class='meta'><strong>images.moneycontrol.com</strong> | Fri, 14 Aug 2026 07:00:00 </p>
+            <h3><a href='https://finance.yahoo.com/research/reports/ARGUS_3631_AnalystReport_1786528469000/' target='_blank'>Analyst Report: Monster Beverage Corp</a></h3>
+            <p class='meta'><strong>Yahoo Entertainment</strong> | 2026-08-12 09:54:29</p>
         </div>
         
         <div class='article'>
-            <h3><a href='https://news.google.com/rss/articles/CBMihAFBVV95cUxOWDJsX01ROENIQTNMM3JfTFM2akFvb1hqT3R2WHo0dFZ4NENlMkNCVzgta3lKbTFRZ1NqQWpqV2JSVFl6eGtEeVdKRjh1UU56Y1plNnpJb3NBYm92N3V5TEpleXdyYzZYeXNEU1c5bnFDM0dDcFh1YU9nRlFfVGc4X3R0Q00?oc=5' target='_blank'>M P STEEL (INDIA) LIMITED CORPORATE IDENTITY NUMBER: U28999GJ1998PLC033954</a></h3>
-            <p class='meta'><strong>images.moneycontrol.com</strong> | Fri, 21 Aug 2026 07:00:00 </p>
+            <h3><a href='https://finance.yahoo.com/research/reports/ARGUS_6630_AnalystReport_1786384995000/' target='_blank'>Analyst Report: Sterling Infrastructure Inc</a></h3>
+            <p class='meta'><strong>Yahoo Entertainment</strong> | 2026-08-10 18:03:15</p>
         </div>
         
                 </div>
-                
+
             </div>
-            
-            <!-- Right Side: Market Watch Table -->
+
             <div class="sidebar">
                 <div class="market-header">Market Watch</div>
                 <table class="market-table">
@@ -293,82 +298,50 @@
                     </thead>
                     <tbody>
                         
-            <tr>
-                <td class='ticker-name'>Reliance</td>
-                <td class='price'>1317.00</td>
-                <td class='change' style='color:#16a34a'>+0.55%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>Blue Clouds</td>
-                <td class='price'>22.28</td>
-                <td class='change' style='color:#dc2626'>-3.05%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>Gold BeES</td>
-                <td class='price'>nan</td>
-                <td class='change' style='color:#dc2626'>nan%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>Nifty BeES</td>
-                <td class='price'>nan</td>
-                <td class='change' style='color:#dc2626'>nan%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>Patel Eng</td>
-                <td class='price'>nan</td>
-                <td class='change' style='color:#dc2626'>nan%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>RBA</td>
-                <td class='price'>106.31</td>
-                <td class='change' style='color:#dc2626'>-0.13%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>REC Ltd</td>
-                <td class='price'>326.00</td>
-                <td class='change' style='color:#dc2626'>-0.58%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>Junior BeES</td>
-                <td class='price'>nan</td>
-                <td class='change' style='color:#dc2626'>nan%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>S&P 500</td>
-                <td class='price'>7677.28</td>
-                <td class='change' style='color:#16a34a'>+0.32%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>Nasdaq</td>
-                <td class='price'>26151.30</td>
-                <td class='change' style='color:#16a34a'>+0.66%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>FTSE 100</td>
-                <td class='price'>10886.20</td>
-                <td class='change' style='color:#16a34a'>+0.29%</td>
-            </tr>
-            
-            <tr>
-                <td class='ticker-name'>Nikkei 225</td>
-                <td class='price'>66227.55</td>
-                <td class='change' style='color:#16a34a'>+0.56%</td>
-            </tr>
-            
+        <tr>
+            <td class='ticker-name'>Reliance</td>
+            <td class='price'>1295.30</td>
+            <td class='change' style='color:#dc2626'>-0.21%</td>
+        </tr>
+        <tr><td class='ticker-name'>Blue Clouds</td><td colspan='2' class='price'>N/A</td></tr><tr><td class='ticker-name'>Gold BeES</td><td colspan='2' class='price'>N/A</td></tr><tr><td class='ticker-name'>Nifty BeES</td><td colspan='2' class='price'>N/A</td></tr>
+        <tr>
+            <td class='ticker-name'>Patel Eng</td>
+            <td class='price'>28.67</td>
+            <td class='change' style='color:#16a34a'>+0.10%</td>
+        </tr>
+        <tr><td class='ticker-name'>RBA</td><td colspan='2' class='price'>N/A</td></tr>
+        <tr>
+            <td class='ticker-name'>REC Ltd</td>
+            <td class='price'>321.65</td>
+            <td class='change' style='color:#dc2626'>-0.17%</td>
+        </tr>
+        <tr><td class='ticker-name'>Junior BeES</td><td colspan='2' class='price'>N/A</td></tr>
+        <tr>
+            <td class='ticker-name'>S&P 500</td>
+            <td class='price'>7675.70</td>
+            <td class='change' style='color:#dc2626'>-0.02%</td>
+        </tr>
+        
+        <tr>
+            <td class='ticker-name'>Nasdaq</td>
+            <td class='price'>26130.20</td>
+            <td class='change' style='color:#dc2626'>-0.08%</td>
+        </tr>
+        <tr><td class='ticker-name'>FTSE 100</td><td colspan='2' class='price'>N/A</td></tr>
+        <tr>
+            <td class='ticker-name'>Nikkei 225</td>
+            <td class='price'>66131.98</td>
+            <td class='change' style='color:#dc2626'>-0.20%</td>
+        </tr>
+        
                     </tbody>
                 </table>
             </div>
-            
+
+        </div>
+
+        <div class="footer-note">
+            Articles limited to the last 48 hours · Trusted publishers shown first · Auto-generated, verify before acting on any figure
         </div>
     </div>
 </body>
