@@ -1,2 +1,4 @@
 feedparser
 yfinance
+requests
+python-dotenv
