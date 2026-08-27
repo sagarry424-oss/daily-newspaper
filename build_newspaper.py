@@ -15,8 +15,13 @@ except ImportError:
     pass
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+FINANCE_API_KEY = os.getenv("FINANCE_API_KEY")
 
 # 1. Fetch Market Data & Foreign Indices
+# yfinance is the PRIMARY source: free, no rate limit, and already reliable
+# for these tickers. Alpha Vantage's free tier only allows 25 requests/day,
+# so it is used strictly as a FALLBACK for whichever tickers yfinance fails
+# on — not called at all if yfinance already succeeded for everything.
 tickers = {
     "Reliance": "RELIANCE.NS",
     "Blue Clouds": "BLUECLOUDS.NS",
@@ -32,8 +37,59 @@ tickers = {
     "Nikkei 225": "^N225"
 }
 
+# Alpha Vantage uses different symbol formats than yfinance/Yahoo.
+# Indian stocks: ".BSE" suffix instead of ".NS". Global indices don't have
+# direct index tickers on the free tier, so widely-tracked ETFs are used
+# as a close proxy (SPY tracks the S&P 500, QQQ tracks the Nasdaq-100).
+# FTSE/Nikkei have no reliable free equivalent, so they're left out —
+# those two just show N/A if yfinance ever fails for them.
+alpha_vantage_symbols = {
+    "Reliance": "RELIANCE.BSE",
+    "Blue Clouds": "BLUECLOUDS.BSE",
+    "Gold BeES": "GOLDBEES.BSE",
+    "Nifty BeES": "NIFTYBEES.BSE",
+    "Patel Eng": "PATELENG.BSE",
+    "RBA": "RBA.BSE",
+    "REC Ltd": "RECLTD.BSE",
+    "Junior BeES": "JUNIORBEES.BSE",
+    "S&P 500": "SPY",
+    "Nasdaq": "QQQ",
+}
+
+
+def fetch_from_alpha_vantage(name):
+    """Fallback quote lookup. Returns (curr, pct) or None if unavailable."""
+    av_symbol = alpha_vantage_symbols.get(name)
+    if not av_symbol or not FINANCE_API_KEY:
+        return None
+
+    try:
+        response = requests.get(
+            "https://www.alphavantage.co/query",
+            params={
+                "function": "GLOBAL_QUOTE",
+                "symbol": av_symbol,
+                "apikey": FINANCE_API_KEY,
+            },
+            timeout=10,
+        )
+        response.raise_for_status()
+        quote = response.json().get("Global Quote", {})
+        curr = float(quote.get("05. price", 0) or 0)
+        pct_str = quote.get("10. change percent", "0%").replace("%", "")
+        pct = float(pct_str or 0)
+        if curr == 0:
+            return None
+        return curr, pct
+    except Exception as e:
+        print(f"Alpha Vantage fallback failed for {name} ({av_symbol}): {e}")
+        return None
+
+
 market_rows = ""
 for name, symbol in tickers.items():
+    curr = pct = None
+
     try:
         ticker = yf.Ticker(symbol)
         hist = ticker.history(period="2d")
@@ -41,17 +97,26 @@ for name, symbol in tickers.items():
             prev = hist['Close'].iloc[-2]
             curr = hist['Close'].iloc[-1]
             pct = ((curr - prev) / prev) * 100
-            color = "#16a34a" if pct >= 0 else "#dc2626"
-            sign = "+" if pct >= 0 else ""
-
-            market_rows += f"""
-            <tr>
-                <td class='ticker-name'>{name}</td>
-                <td class='price'>{curr:.2f}</td>
-                <td class='change' style='color:{color}'>{sign}{pct:.2f}%</td>
-            </tr>
-            """
     except Exception:
+        pass
+
+    # yfinance failed (or returned insufficient history) — try Alpha Vantage
+    if curr is None:
+        fallback = fetch_from_alpha_vantage(name)
+        if fallback:
+            curr, pct = fallback
+
+    if curr is not None:
+        color = "#16a34a" if pct >= 0 else "#dc2626"
+        sign = "+" if pct >= 0 else ""
+        market_rows += f"""
+        <tr>
+            <td class='ticker-name'>{name}</td>
+            <td class='price'>{curr:.2f}</td>
+            <td class='change' style='color:{color}'>{sign}{pct:.2f}%</td>
+        </tr>
+        """
+    else:
         market_rows += f"<tr><td class='ticker-name'>{name}</td><td colspan='2' class='price'>N/A</td></tr>"
 
 TRUSTED_PUBLISHERS = [
