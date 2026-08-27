@@ -3,7 +3,7 @@ name: Daily Newspaper Update
 on:
   schedule:
     # Runs daily at 2:00 AM UTC (which is 7:30 AM IST)
-    - cron: '0 2 * * *' 
+    - cron: '0 2 * * *'
   workflow_dispatch: # This line allows you to trigger it manually anytime!
 
 permissions:
@@ -25,6 +25,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Newspaper Script
+        env:
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
         run: python build_newspaper.py
 
       - name: Commit and Push Output
